@@ -1,8 +1,8 @@
 variable "project" {
-  default = "tutorial-436209"
+  default = "orbital-purpose-436613-g1" # Demo-cloud-pilots
 }
 variable "region" {
-  default = "europe-west6"
+  default = "europe-west6" # Zurich
 }
 # Zurich
 
