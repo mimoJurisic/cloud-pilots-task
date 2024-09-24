@@ -17,6 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: demo
 
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
@@ -29,6 +33,7 @@ jobs:
 
     - name: Google Auth
       uses: 'google-github-actions/auth@v2'
+
       with:
         workload_identity_provider: '${{ secrets.WI_PROVIDER}}'
         service_account: '${{ secrets.SA_EMAIL}}'
