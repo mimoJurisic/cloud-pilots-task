@@ -11,7 +11,7 @@ spec:
     - host: demo.forest-coder.com
       http:
         paths:
-          - path: /acme
+          - path: /
             pathType: Exact
             backend:
               service:
