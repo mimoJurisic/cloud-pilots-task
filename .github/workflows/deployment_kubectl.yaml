@@ -10,11 +10,13 @@ on:
 
 jobs:
   kubectl:
+    name: 'Kubectl'
+    runs-on: ubuntu-latest
+    environment: demo
     permissions:
       contents: 'read'
       id-token: 'write'
-    name: Deploy to Kubernetes
-    runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
