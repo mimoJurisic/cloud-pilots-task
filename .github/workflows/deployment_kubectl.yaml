@@ -1,0 +1,29 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: 
+      - '.github/workflows/deploymnet_kubectl.yml'
+      - 'k8s-configuration/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Kubernetes
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Google Auth
+      uses: 'google-github-actions/auth@v2'
+      with:
+        workload_identity_provider: '${{ secrets.WI_PROVIDER}}'
+        service_account: '${{ secrets.SA_EMAIL}}'
+
+  # https://cloud.google.com/kubernetes-engine/docs/deploy-app-cluster#get_authentication_credentials_for_the_cluster
+    - name: Get authentication credentials for the cluster
+      run: |
+        gcloud container clusters get-credentials demo-cluster --location europe-west6
+    - name: Apply configuration files
+      run: kubectl apply -f k8s-configuration/

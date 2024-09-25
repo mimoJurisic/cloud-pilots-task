@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-deployment
+  namespace: acme
+  labels:
+    app: demo-pods
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: demo-pods
+  template:
+    metadata:
+      labels:
+        app: demo-pods
+    spec:
+      containers:
+      - name: demo-pods
+        image: us-docker.pkg.dev/cloudrun/container/hello
+        ports:
+        - containerPort: 8080
