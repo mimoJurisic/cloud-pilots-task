@@ -14,6 +14,8 @@ Steps followed:
 - create k8s deployments (k8s.tf)
 - create variables (variables.tf)
 - create output (outputs.tf)
+- create Bucket for tf.state
+- create backend to connect to remote tf.state
 # 4) k8s deployment files
 - create deployment
 - create service (deafult=CLusterIp)
@@ -23,3 +25,4 @@ Steps followed:
 
 # Additional
 I added an A-Record in my AWS account -> route 53 Service -> demo.forest-coder.com
+- git privat email error: https://stackoverflow.com/questions/43378060/meaning-of-the-github-message-push-declined-due-to-email-privacy-restrictions
