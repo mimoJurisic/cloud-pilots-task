@@ -16,10 +16,15 @@ jobs:
     permissions:
       contents: 'read'
       id-token: 'write'
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
+      
     - name: Google Auth
       uses: 'google-github-actions/auth@v2'
       with:
