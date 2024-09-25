@@ -32,8 +32,14 @@ jobs:
         service_account: '${{ secrets.SA_EMAIL}}'
 
   # https://cloud.google.com/kubernetes-engine/docs/deploy-app-cluster#get_authentication_credentials_for_the_cluster
+  # https://github.com/actions/runner-images/issues/6778
     - name: Get authentication credentials for the cluster
       run: |
+        echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+        curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+        sudo apt update
+        sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin kubectl
+        export USE_GKE_GCLOUD_AUTH_PLUGIN=True
         gcloud container clusters get-credentials demo-cluster --location europe-west6
     - name: Apply configuration files
       run: kubectl apply -f k8s-configuration/
