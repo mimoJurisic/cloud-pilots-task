@@ -1,4 +1,4 @@
-name: Deploy to Kubernetes
+name: 'Kubectl'
 
 on:
   push:
@@ -9,7 +9,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  kubectl:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     name: Deploy to Kubernetes
     runs-on: ubuntu-latest
     steps:
