@@ -3,10 +3,19 @@ kind: Ingress
 metadata:
   name: demo-ingress
   namespace: acme
+  # annotations:
+  #   networking.gke.io/managed-certificates: demo-certificates
   annotations:
-    networking.gke.io/managed-certificates: demo-certificates
+    # kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/issuer: letsencrypt-prod
+    # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    # certmanager.k8s.io/acme-challenge-type: http01
 
 spec:
+  tls:
+  -  secretName: demo.forest-coder.com
+     hosts:
+     - demo.forest-coder.com
   rules:
     - host: demo.forest-coder.com
       http:
@@ -18,3 +27,17 @@ spec:
                 name:  demo-service
                 port:
                   number: 80
+          # - path: /test-https
+          #   pathType: Exact
+          #   backend:
+          #     service:
+          #       name:  demo-service
+          #       port:
+          #         number: 443
+          # - path: /.well-known/acme-challenge/yWq5OJpw-I-nfXHzDhrYuE8rhQ-526oTVe8aLEQ72VM
+          #   pathType: Exact
+          #   backend:
+          #     service:
+          #       name:  cm-acme-http-solver-z5xn8
+          #       port:
+          #         number: 8089

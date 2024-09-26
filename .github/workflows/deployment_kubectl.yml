@@ -43,3 +43,11 @@ jobs:
         gcloud container clusters get-credentials demo-cluster --location europe-west6
     - name: Apply configuration files
       run: kubectl apply -f k8s-configuration/
+    # - name: create certificate
+    #   run: |
+    #     helm install cert-manager cert-manager \
+    #     --repo https://charts.jetstack.io \
+    #     --create-namespace --namespace cert-manager \
+    #     --set installCRDs=true  
+    # - name: Create Issuer and the certificate
+    #   run: kubectl apply -f k8s-configuration/certificate

@@ -15,8 +15,25 @@ spec:
       labels:
         app: demo-pods
     spec:
+      volumes:
+      - name: tls-volume
+        secret:
+          secretName: demo.forest-coder.com
       containers:
       - name: demo-pods
         image: us-docker.pkg.dev/cloudrun/container/hello
         ports:
         - containerPort: 8080
+      # - name: https-sample
+      #   image: us-docker.pkg.dev/google-samples/containers/gke/hello-app-tls:1.0
+      #   ports:
+      #   - containerPort: 8443
+      #   volumeMounts:
+      #     - name: tls-volume
+      #       mountPath: /etc/tls
+      #       readOnly: true
+      #   env:
+      #     - name: TLS_CERT
+      #       value: /etc/tls/tls.crt
+      #     - name: TLS_KEY
+      #       value: /etc/tls/tls.key

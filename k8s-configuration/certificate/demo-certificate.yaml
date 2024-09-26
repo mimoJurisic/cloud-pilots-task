@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: demo.forest-coder.com
+  namespace: acme
+spec:
+  secretName: demo.forest-coder.com
+  dnsNames:
+  - demo.forest-coder.com
+  issuerRef:
+    name: letsencrypt-prod
+    kind: Issuer
